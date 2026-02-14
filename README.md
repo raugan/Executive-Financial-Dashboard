@@ -1,5 +1,10 @@
 # Aurelius Strategic Holdings - Financial Command Centre FY 2025
+# Financial Dashboard - Executive Command Centre
 
+![Excel](https://img.shields.io/badge/Excel-217346?style=flat&logo=microsoft-excel&logoColor=white)
+![License](https://img.shields.io/badge/license-Proprietary-red)
+
+> Transform quarterly financial statements into board-ready executive insights with automated KPIs, interactive visualisations, and dynamic reporting.
 ## Executive Summary
 
 This repository contains a comprehensive, board-level financial dashboard system designed to transform quarterly financial statements into automated, visual executive insights. The dashboard provides real-time KPI tracking, interactive visualizations, and dynamic reporting capabilities.
@@ -8,7 +13,7 @@ This repository contains a comprehensive, board-level financial dashboard system
 
 ### Data Structure
 
-The system uses a normalized, vertical quarterly format with two primary data tables:
+The system uses a normalised, vertical quarterly format with two primary data tables:
 
 **Table_Income** (Income Statement)
 - Location: Sheet "Table_Income", Rows 4-7, Columns A-L
@@ -20,9 +25,9 @@ The system uses a normalized, vertical quarterly format with two primary data ta
 - Quarters: Q1-Q4 2025
 - Key Metrics: Assets (Current, PP&E, Total), Liabilities (Current, Long-term, Total), Equity
 
-### Color Coding System
+### Colour Coding System
 
-Following industry-standard financial modeling conventions:
+Following industry-standard financial modelling conventions:
 
 - **Blue Text (RGB: 0,0,255)**: User inputs and assumptions
 - **Black Text (RGB: 0,0,0)**: Formulas and calculations
@@ -80,7 +85,7 @@ Following industry-standard financial modeling conventions:
 - Formula: `=IF(Z11="","-",Z10/Z11)`
 - Location: Dashboard J11
 - Calculation: EBIT ÷ Interest Expense
-- Format: Multiple format (0.0x)
+- Format: Multiple formats (0.0x)
 
 #### Growth Metrics
 
@@ -92,7 +97,7 @@ Following industry-standard financial modeling conventions:
 
 ### Helper Formulas (Column Z)
 
-All KPIs rely on INDEX/MATCH helper formulas that lookup values based on the selected quarter:
+All KPIs rely on INDEX/MATCH helper formulas that look up values based on the selected quarter:
 
 ```excel
 Z1  (Revenue):           =IFERROR(INDEX(Table_Income!$B$4:$B$7,MATCH($C$4,Table_Income!$A$4:$A$7,0)),"")
@@ -149,7 +154,7 @@ E17: =INDEX(Table_Income!$B$4:$B$7,MATCH("Q4 2025",Table_Income!$A$4:$A$7,0))
 - Type: Filled Radar Chart
 - Metrics: Current Ratio, Quick Ratio, ROE, Interest Coverage, Asset Growth
 - Data: Q4 2025 snapshot
-- Color: Navy Blue (#001F3F)
+- Colour: Navy Blue (#001F3F)
 - Dimensions: 18 wide × 10 high
 
 ## 🎯 Interactive Features
@@ -170,7 +175,7 @@ E17: =INDEX(Table_Income!$B$4:$B$7,MATCH("Q4 2025",Table_Income!$A$4:$A$7,0))
 
 **Dynamic Formula**:
 ```excel
-=IF(Z1="","Select a quarter to view insights",
+=IF(Z1="", "Select a quarter to view insights",
 "For " & $C$4 & ": Revenue reached " & TEXT(Z1,"$#,##0") & 
 " with a " & TEXT(Z3/Z1,"0.0%") & " net margin. Balance sheet strength improved with Debt-to-Equity at " & 
 TEXT(Z8/Z9,"0.00") & " and Current Ratio of " & TEXT(Z4/Z5,"0.00") & 
@@ -226,7 +231,7 @@ End Sub
 ```
 
 **Installation**:
-1. Press Alt+F11 to open VBA Editor
+1. Press Alt+F11 to open the VBA Editor
 2. Insert > Module
 3. Paste macro code from Dashboard_Export_Macros.vba
 4. Run from Developer > Macros menu
@@ -258,7 +263,7 @@ financial-dashboard/
 ### For Power BI Adaptation
 
 **Modify Part 1 (Data Architecture)**:
-- Create Star Schema instead of Excel Tables
+- Create a Star Schema instead of Excel Tables
 - Fact table: Quarterly_Financials
 - Dimension tables: Date_Dimension, Account_Dimension
 - Use CALCULATE and FILTER for KPI measures
@@ -287,7 +292,7 @@ income_df.set_index('Quarter', inplace=True)
 balance_df.set_index('Quarter', inplace=True)
 ```
 
-**Modify Part 3 (Visualization)**:
+**Modify Part 3 (Visualisation)**:
 ```python
 import plotly.express as px
 import streamlit as st
@@ -327,19 +332,19 @@ All formulas include error handling using IFERROR or IF statements to ensure:
 
 ### Adding New Quarters
 
-1. Insert new row in Table_Income and Table_Balance sheets (row 8)
+1. Insert a new row in Table_Income and Table_Balance sheets (row 8)
 2. Enter data for Q1 2026, Q2 2026, etc.
 3. Update data ranges in all formulas (change $7 to $8, etc.)
-4. Add new quarter to dropdown validation list in Dashboard C4
+4. Add a new quarter to the dropdown validation list in Dashboard C4
 
 ### Adding New KPIs
 
-1. Create helper formula in column Z (e.g., Z13 for new metric)
-2. Add new KPI card in dashboard (copy existing card structure)
+1. Create a helper formula in column Z (e.g., Z13 for the new metric)
+2. Add a new KPI card in the dashboard (copy existing card structure)
 3. Update chart data if visualization needed
 4. Document formula in this README
 
-### Changing Color Scheme
+### Changing Colour Scheme
 
 Update these variables in the Python creation script:
 ```python
@@ -350,7 +355,7 @@ STEEL_GREY = 'D1D5DB'     # Tertiary color
 
 ## 📝 Best Practices
 
-1. Always update both Income and Balance sheets with consistent quarter labels
+1. Always update both the Income and Balance sheets with consistent quarter labels
 2. Use the same currency denomination across all sheets ($ or $000 or $MM)
 3. Verify formulas after adding new data using the quarter selector
 4. Export snapshots to PDF before board meetings
@@ -364,17 +369,23 @@ To contribute enhancements:
 2. Create a feature branch
 3. Test all formulas for zero errors
 4. Update documentation
-5. Submit pull request with clear description
+5. Submit a pull request with a clear description
+## Contributing
 
+Contributions welcome! Please read the contributing guidelines before submitting PRs.
+
+## Support
+
+For issues or questions, please open a GitHub issue.
 ## 📄 License
 
-Proprietary - For internal use by Aurelius Strategic Holdings and authorized parties only.
+Proprietary - For internal use by Aurelius Strategic Holdings and authorised parties only.
 
 ## ✨ Version History
 
 **v1.0** - February 2026
 - Initial release with core KPI engine
-- Four primary visualizations
+- Four primary visualisations
 - Executive insights generator
 - PDF export capability
 - Complete documentation
